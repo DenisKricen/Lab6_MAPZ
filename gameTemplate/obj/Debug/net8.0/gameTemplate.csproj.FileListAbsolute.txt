@@ -1,0 +1,14 @@
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/bin/Debug/net8.0/gameTemplate
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/bin/Debug/net8.0/gameTemplate.deps.json
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/bin/Debug/net8.0/gameTemplate.runtimeconfig.json
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/bin/Debug/net8.0/gameTemplate.dll
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/bin/Debug/net8.0/gameTemplate.pdb
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/gameTemplate.GeneratedMSBuildEditorConfig.editorconfig
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/gameTemplate.AssemblyInfoInputs.cache
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/gameTemplate.AssemblyInfo.cs
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/gameTemplate.csproj.CoreCompileInputs.cache
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/gameTemplate.dll
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/refint/gameTemplate.dll
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/gameTemplate.pdb
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/gameTemplate.genruntimeconfig.cache
+/home/denys/Stuff/toLinux/University_Tasks/year_2025_2026/sem4/MAPZ/Lab4_MAPZ/code/gameTemplate/obj/Debug/net8.0/ref/gameTemplate.dll
