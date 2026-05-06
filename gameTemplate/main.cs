@@ -1,101 +1,57 @@
 ﻿using System;
 
-
 public class Program
 {
     public static void Main()
     {
         Player player = Player.Instance;
+        SpaceSimFacade gameFacade = new SpaceSimFacade();
+
         Console.WriteLine($"Initial Status - Health: {player.Health}, Money: {player.Money}, Weapon: {player.EquippedWeapon.Name}.");
 
+        Console.WriteLine("\n------------------------------------------------");
         Console.WriteLine("\n>>> Transition to dangerous sector.");
+        ISectorFactory sectorFactory = new CriminalSectorFactory();
         
-        ISectorFactory criminalFactory = new CriminalSectorFactory();
-        
-        IEntity pirate = criminalFactory.CreateEnemy();
+        // Pirates encounter
+        IEnemy pirate = sectorFactory.CreateEnemy();
         int pirateChoice = pirate.GetMenu();
-        switch (pirateChoice)
+        try
         {
-            case 1: 
-                player.Health -= 30;
-                Console.WriteLine($"Pirates destroyed. Player took damage. Current health: {player.Health}."); 
-                break;
-            case 2: 
-                player.Money -= 100;
-                Console.WriteLine($"Pirates bribed. Money deducted. Current money: {player.Money}."); 
-                break;
-            default: 
-                Console.WriteLine("Action skipped."); 
-                break;
+            gameFacade.ResolveCombatEncounter(player, pirate, pirateChoice);
+        } catch(PlayerIsDead e)
+        {
+            Console.WriteLine($"{e.Message}");
+            return;
         }
 
-        IEntity blackMarket = criminalFactory.CreateMerchant();
-        int marketChoice = blackMarket.GetMenu();
-        switch (marketChoice)
-        {
-            case 1: 
-                player.Money -= 200;
-
-                int randomDamage = Random.Shared.Next(60, 101);
-                int randomAmmo = Random.Shared.Next(30, 71);
-                int randomAccuracy = Random.Shared.Next(80, 101);
-                
-                player.EquippedWeapon = new WeaponBuilder()
-                    .SetName("Heavy Plasma Cannon")
-                    .SetDamage(randomDamage)
-                    .SetAmmo(randomAmmo)
-                    .SetAccuracy(randomAccuracy)
-                    .Build();
-                
-                Console.WriteLine($"Weapon obtained: {player.EquippedWeapon.Name}. Current money: {player.Money}."); 
-                break;
-            case 2: 
-                Console.WriteLine("Left black market."); 
-                break;
-            default: 
-                Console.WriteLine("Action skipped."); 
-                break;
-        }
+        // Black merchant encounter
+        IMerchant blackMarketTrader = sectorFactory.CreateMerchant();
+        int marketChoice = blackMarketTrader.GetMenu();
+        gameFacade.ResolveTradeEncounter(player, blackMarketTrader, marketChoice);
 
         Console.WriteLine("\n------------------------------------------------");
         Console.WriteLine(">>> Transition to peaceful sector.");
+        sectorFactory = new PeacefulSectorFactory();
         
-        ISectorFactory peacefulFactory = new PeacefulSectorFactory();
-        
-        IEntity patrol = peacefulFactory.CreateEnemy();
+        // Impire patrol encounter
+        IEnemy patrol = sectorFactory.CreateEnemy();
         int patrolChoice = patrol.GetMenu();
-        switch (patrolChoice)
+        try
         {
-            case 1: 
-                player.Health -= 40;
-                Console.WriteLine($"Patrol engaged. Player took damage. Current health: {player.Health}."); 
-                break;
-            case 2: 
-                player.Health -= 10;
-                Console.WriteLine($"Escaped patrol with minor damage. Current health: {player.Health}."); 
-                break;
-            default: 
-                Console.WriteLine("Action skipped."); 
-                break;
+            gameFacade.ResolveCombatEncounter(player, patrol, patrolChoice);
+        } catch(PlayerIsDead e)
+        {
+            Console.WriteLine($"{e.Message}");
+            return;
         }
 
-        IEntity merchant = peacefulFactory.CreateMerchant();
+        // Merchant encounter
+        IMerchant merchant = sectorFactory.CreateMerchant();
         int merchantChoice = merchant.GetMenu();
-        switch (merchantChoice)
-        {
-            case 1: 
-                player.Money -= 50;
-                player.Health = 100;
-                Console.WriteLine($"Repair kit obtained. Health restored to {player.Health}. Current money: {player.Money}."); 
-                break;
-            case 2: 
-                Console.WriteLine("Left trading station."); 
-                break;
-            default: 
-                Console.WriteLine("Action skipped."); 
-                break;
-        }
+        gameFacade.ResolveTradeEncounter(player, merchant, merchantChoice);
 
+        // Final stats
         Console.WriteLine($"\nFinal Status - Health: {player.Health}, Money: {player.Money}.");
         Console.WriteLine($"Weapon Specs: \nName- {player.EquippedWeapon.Name}\nDamage- {player.EquippedWeapon.Damage}\nAmmo- {player.EquippedWeapon.Ammo}\nAccuracy- {player.EquippedWeapon.Accuracy}%");    
     }
