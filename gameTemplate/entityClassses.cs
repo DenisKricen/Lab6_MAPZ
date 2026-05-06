@@ -112,6 +112,47 @@ public class BlackMarketTrader : IMerchant
     }
 }
 
+// Proxy usage
+public class BlackMarketGuardProxy : IMerchant
+{
+    private IMerchant trader;
+    private Player player;
+
+    public Weapon WeaponItem { get; }
+    public int WeaponPrice { get; }
+    public int RepairKitPrice { get; }
+    public int BuffPrice { get; }
+
+    public BlackMarketGuardProxy(IMerchant realTrader, Player realPlayer)
+    {
+        trader = realTrader;
+        player = realPlayer;
+    }
+
+    public int GetMenu()
+    {
+
+        if (player.Money < 1100) 
+        {
+            Console.WriteLine("[GUARD] You have no enough money to buy stuff here");
+            return 4; 
+        }
+        
+        // If everything okay - delegating work to real trader
+        return trader.GetMenu();
+    }
+
+    public string GetActionMessage(int choice)
+    {
+        if (choice == 4)
+        {
+            return "You are leaving";
+        }
+
+        return trader.GetActionMessage(choice);
+    }
+}
+
 public class Merchant : IMerchant
 {
     public Weapon? WeaponItem { get; set; }

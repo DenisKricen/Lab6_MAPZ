@@ -10,6 +10,7 @@ public class CombatSystem
 
         if (player.Health <= amount)
         {
+            player.Health -= amount;
             Console.WriteLine("[Dead] You have no health left, you are dead.");
             throw new PlayerIsDead();
         }
