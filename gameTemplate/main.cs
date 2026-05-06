@@ -11,7 +11,8 @@ public class Program
 
         Console.WriteLine("\n------------------------------------------------");
         Console.WriteLine("\n>>> Transition to dangerous sector.");
-        ISectorFactory sectorFactory = new CriminalSectorFactory();
+        // ISectorFactory sectorFactory = new CriminalSectorFactory();
+        ISectorFactory sectorFactory = new UltraChallengeCriminalSectorFactory(new CriminalSectorFactory());
         
         // Pirates encounter
         IEnemy pirate = sectorFactory.CreateEnemy();

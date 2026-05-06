@@ -34,6 +34,7 @@ public class SpaceSimFacade
 
                 if (economy.TrySpendMoney(player, enemy.EscapeCost))
                 {
+                    Console.WriteLine("[Combat] You have escaped.");
                     Console.WriteLine($"[Economy] Paid {enemy.EscapeCost} credits.");
                 }
                 else
@@ -56,9 +57,10 @@ public class SpaceSimFacade
                 {
                     player.EquippedWeapon = merchant.WeaponItem.Clone();
                     Console.WriteLine($"[Trade] {message} Installed: {player.EquippedWeapon.Name}");
+                    Console.WriteLine($"[Trade] Money remaining: {player.Money}");
                 } else
                 {
-                    Console.WriteLine($"Player do not have enough money for this weapon. Has: {player.Money}, required: {merchant.WeaponPrice}.");
+                    Console.WriteLine($"[Trade] Player do not have enough money for this weapon. Has: {player.Money}, required: {merchant.WeaponPrice}.");
                 }
                 break;
 
@@ -66,6 +68,8 @@ public class SpaceSimFacade
                 if (economy.TrySpendMoney(player, merchant.RepairKitPrice))
                 {
                     combat.Heal(player, player.MaxHealth, message);
+                    Console.WriteLine($"[Health] HP: {player.Health}");
+                    Console.WriteLine($"[Trade] Money remaining: {player.Money}");
                 } else
                 {
                     Console.WriteLine($"[Trade] Player do not have enough money for repair kit. Has: {player.Money}, required: {merchant.WeaponPrice}.");
@@ -76,10 +80,11 @@ public class SpaceSimFacade
                 if (economy.TrySpendMoney(player, merchant.BuffPrice))
                 {
                     player.MaxHealth += 50;
-                    Console.WriteLine($"[Trade] {message} Buff received.");
+                    Console.WriteLine($"[Trade] {message} Buff received. Max. health: {player.MaxHealth}");
+                    Console.WriteLine($"[Trade] Money remaining: {player.Money}");
                 } else
                 {
-                    Console.WriteLine($"[Trade] Player do not have enough money for buff. Has: {player.Money}, required: {merchant.WeaponPrice}.");
+                    Console.WriteLine($"[Trade] Player do not have enough money for buff. Has: {player.Money}, required: {merchant.BuffPrice}.");
                 }
                 break;
             case 4: // Leave

@@ -74,8 +74,8 @@ public class BlackMarketTrader : IMerchant
         int res=0;
 
         Console.WriteLine("\n[SHOP] Black market accessed.");
-        Console.WriteLine("1. Buy weapons.");
-        Console.WriteLine("2. Buy health buff.");
+        Console.WriteLine($"1. Buy weapon: {WeaponItem.Name} for {WeaponPrice}");
+        Console.WriteLine($"2. Buy health buff (50 hp) for {BuffPrice}");
         Console.WriteLine("3. Leave.");
         Console.Write("Input: ");
         
@@ -124,7 +124,7 @@ public class Merchant : IMerchant
         int res=0;
 
         Console.WriteLine("\n[SHOP] Trading station docked.");
-        Console.WriteLine("1. Buy standard repair kit.");
+        Console.WriteLine($"1. Buy standard repair kit (150hp) for {RepairKitPrice}");
         Console.WriteLine("2. Leave.");
         Console.Write("Input: ");
 
