@@ -10,22 +10,22 @@ public class Program
         
         CommandHistory history = new CommandHistory();
 
+        Console.WriteLine($"Initial Status - Health: {player.Health}, Money: {player.Money}, Weapon: {player.EquippedWeapon.Name}.");
+        Console.WriteLine("\n------------------------------------------------");
+
         do
         {
-            Console.WriteLine($"Initial Status - Health: {player.Health}, Money: {player.Money}, Weapon: {player.EquippedWeapon.Name}.");
-            Console.WriteLine("\n------------------------------------------------");
-            
-            history.ExecuteCommand(new TransitionCommand("Dangerous Criminal Sector"));
-            
+            // Transition to challenge space sector
+            TransitionCommand dangerJump = new TransitionCommand(new UltraChallengeCriminalSectorFactory(new CriminalSectorFactory()));
+            history.ExecuteCommand(dangerJump);
             // Decorator usage: 50% normal behaviour and 50% for special mob
-            ISectorFactory sectorFactory = new UltraChallengeCriminalSectorFactory(new CriminalSectorFactory());
+            ISectorFactory sectorFactory = dangerJump.GeneratedFactory;
             
             // Pirates encounter
             IEnemy pirate = sectorFactory.CreateEnemy();
-            int pirateChoice = pirate.GetMenu();
             try
             {
-                history.ExecuteCommand(new CombatCommand(gameFacade, player, pirate, pirateChoice));
+                history.ExecuteCommand(new CombatCommand(gameFacade, player, pirate, pirate.GetMenu()));
             } 
             catch(PlayerIsDead e)
             {
@@ -38,17 +38,13 @@ public class Program
 
             // Proxy usage: check player's wealth before allow to buy stuff
             IMerchant blackTraderProxy = new BlackMarketGuardProxy(blackMarketTrader, player);
+            history.ExecuteCommand(new TradeCommand(gameFacade, player, blackTraderProxy, blackTraderProxy.GetMenu()));
 
-            int marketChoice = blackTraderProxy.GetMenu();
-            
-            history.ExecuteCommand(new TradeCommand(gameFacade, player, blackTraderProxy, marketChoice));
-
-            Console.WriteLine("\n------------------------------------------------");
-            
-            history.ExecuteCommand(new TransitionCommand("Peaceful Empire Sector"));
-            
-            sectorFactory = new PeacefulSectorFactory();
-            
+            // Transition to peasful sector
+            TransitionCommand peaceJump = new TransitionCommand(new PeacefulSectorFactory());
+            history.ExecuteCommand(peaceJump);
+            sectorFactory = peaceJump.GeneratedFactory;
+                        
             // Impire patrol encounter
             IEnemy patrol = sectorFactory.CreateEnemy();
             int patrolChoice = patrol.GetMenu();
@@ -74,10 +70,8 @@ public class Program
         Console.WriteLine($"\nFinal Status - Health: {player.Health}, Money: {player.Money}.");
         Console.WriteLine($"Weapon Specs: \nName- {player.EquippedWeapon.Name}\nDamage- {player.EquippedWeapon.Damage}\nAmmo- {player.EquippedWeapon.Ammo}\nAccuracy- {player.EquippedWeapon.Accuracy}%");    
         
-        Console.WriteLine("\n------------------------------------------------");
-        Console.WriteLine("=== COMMAND JOURNAL ===");
         
-        
+        // Save journal history
         var originalConsoleOut = Console.Out;
         using (var stringWriter = new StringWriter())
         {
