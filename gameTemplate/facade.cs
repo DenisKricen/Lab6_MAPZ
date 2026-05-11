@@ -44,6 +44,7 @@ public class SpaceSimFacade
                 }
                 break;
         }
+        Console.WriteLine("\n");
     }
 
     public void ResolveTradeEncounter(Player player, IMerchant merchant, int choice)
@@ -58,6 +59,8 @@ public class SpaceSimFacade
                     player.EquippedWeapon = merchant.WeaponItem.Clone();
                     Console.WriteLine($"[Trade] {message} Installed: {player.EquippedWeapon.Name}");
                     Console.WriteLine($"[Trade] Money remaining: {player.Money}");
+                    Console.WriteLine($"[Trade] Weapon: \nName- {player.EquippedWeapon.Name}\nDamage- {player.EquippedWeapon.Damage}\nAmmo- {player.EquippedWeapon.Ammo}\nAccuracy- {player.EquippedWeapon.Accuracy}%");    
+
                 } else
                 {
                     Console.WriteLine($"[Trade] Player do not have enough money for this weapon. Has: {player.Money}, required: {merchant.WeaponPrice}.");
@@ -95,5 +98,6 @@ public class SpaceSimFacade
                 Console.WriteLine("UNKOWN OPTION FOR TRADE ENCOUNTER.");
                 break;
         }
+        Console.WriteLine("\n");
     }
 }

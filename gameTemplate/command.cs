@@ -48,7 +48,7 @@ public class TransitionCommand : ICommand
     public void Execute()
     {
         string sectorName = GeneratedFactory.GetType().Name;
-        Console.WriteLine($"\n>>> Transition to {sectorName}.");
+        Console.WriteLine($"\n>>> Transition to {sectorName}\n");
     }
 
     public string GetLogMessage()

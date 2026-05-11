@@ -121,21 +121,17 @@ public class UltraChallengeCriminalSectorFactory : SectorFactoryDecorator
 
     public override IMerchant CreateMerchant()
     {
+
+        IMerchant merchant = wrapper.CreateMerchant();
+
         // 50% chance to use base behavior
-        if (random.NextDouble() < 0.5)
-            return wrapper.CreateMerchant();
+        if (random.NextDouble() < 0.9)
+        {
+            Console.WriteLine("[Me] Something off with this merchant...");
+            merchant.SetStrategy(new ScamTradeStrategy());
+        }
 
-        Console.WriteLine("[Me] Something off with this merchant...");
-        var merchant = new BlackMarketTrader();
-        var weapon = WeaponManager.GenerateRandomWeapon();
-        weapon.Damage = random.Next(10, 21);        
-        weapon.Accuracy = random.Next(60, 71);      
-        weapon.Ammo = random.Next(15, 26);       
-
-        merchant.WeaponItem = weapon;
-        merchant.WeaponPrice = weapon.Price;
-        merchant.RepairKitPrice = 0;
-        merchant.BuffPrice = 100;
         return merchant;
+        
     }
 }

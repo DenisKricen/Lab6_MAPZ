@@ -21,4 +21,5 @@ public interface IMerchant : IEntity
     int BuffPrice { get; }
     
     string GetActionMessage(int choice);
+    IMerchant SetStrategy(ITradingStrategy strategy);
 }
