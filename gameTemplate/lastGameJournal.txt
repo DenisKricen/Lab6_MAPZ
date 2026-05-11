@@ -1,6 +1,0 @@
-- [09:49:42] Warp jump completed. Arrived at: Dangerous Criminal Sector.
-- [09:49:44] Combat encounter initiated with [PirateShip]. Action code: 2.
-- [09:49:44] Trade session with [BlackMarketGuardProxy]. Action code: 4.
-- [09:49:44] Warp jump completed. Arrived at: Peaceful Empire Sector.
-- [09:49:47] Combat encounter initiated with [EmpirePatrol]. Action code: 2.
-- [09:49:53] Trade session with [Merchant]. Action code: 2.
