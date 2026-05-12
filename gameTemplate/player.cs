@@ -7,6 +7,9 @@ public class Player
     public int Money { get; set; }
     public Weapon EquippedWeapon { get; set; }
 
+    public int Shield { get; set; } = 50; 
+    public int Armor { get; set; } = 20;
+
     private Player()
     {
         Health = 100;

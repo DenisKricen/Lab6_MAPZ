@@ -36,7 +36,7 @@ public class ScamTradeStrategy : ITradingStrategy
 
     public Weapon GetWeapon(Weapon baseWeapon)
     {
-                  
+
         Weapon brokenWeapon = baseWeapon.Clone();
         brokenWeapon.Name = baseWeapon.Name;
         brokenWeapon.Damage = Math.Min(1, baseWeapon.Damage / 2);

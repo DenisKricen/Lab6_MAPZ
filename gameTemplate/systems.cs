@@ -1,5 +1,16 @@
 public class CombatSystem
 {
+
+    private DefenseHandler defenseChain;
+
+    public CombatSystem()
+    {
+        defenseChain = new ShieldHandler();
+        
+        defenseChain.SetNext(new ArmorHandler())
+                    .SetNext(new HealthHandler());
+    }
+
     public void TakeDamage(Player player, int amount, string message)
     {
         if(amount < 0)
@@ -8,16 +19,7 @@ public class CombatSystem
             return;
         }
 
-        if (player.Health <= amount)
-        {
-            player.Health -= amount;
-            Console.WriteLine("[Dead] You have no health left, you are dead.");
-            throw new PlayerIsDead();
-        }
-
-
-        player.Health -= amount;
-        Console.WriteLine($"[Combat] {message} Received {amount} damage. Remaining HP: {player.Health}");
+        defenseChain.HandleDamage(player, amount);
     }
 
     public void Heal(Player player, int amount, string message)
