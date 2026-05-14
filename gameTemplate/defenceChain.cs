@@ -32,8 +32,7 @@ public class ShieldHandler : DefenseHandler
             Console.WriteLine($"[Defense] Shield took {absorbed} damage. Remaining  durability: {player.Shield}");
         }
 
-        if(damage > 0)
-            base.HandleDamage(player, damage);
+        base.HandleDamage(player, damage);
     }
 }
 
@@ -52,8 +51,7 @@ public class ArmorHandler : DefenseHandler
             Console.WriteLine($"[Defense] Armor took {absorbed} damage. Remaining durability: {player.Armor}");
         }
 
-        if(damage > 0)
-            base.HandleDamage(player, damage);
+        base.HandleDamage(player, damage);
     }
 }
 
